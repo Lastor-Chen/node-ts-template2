@@ -24,7 +24,7 @@ nodemon 預設使用 ts-node 運行 .ts file, `tsconfig` 也有相關設定。<b
 {
   "ts-node": {
     "esm": true, // 需指定啟用 esm
-    "transpileOnly": true
+    "transpileOnly": true // 運行時不做 ts check
   }
 }
 ```
