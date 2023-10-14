@@ -1,11 +1,34 @@
 # Node.js backend with Typescript dev
 
-嘗試使用不同的 typescript runtime 去運行後端專案
-- ts-node + nodemon
-- vite-node
+傳統 typescript cli 的方式編譯速度較慢, 嘗試使用 vite 去運行後端專案。
+
+已嘗試方案:
+- ts-node + nodemon (傳統)
+- vite-node + nodemon
 - vite + vite-plugin-node
 
-也有其他 ts runtime 可做選擇 [TypeScript runtime comparisons](https://github.com/privatenumber/ts-runtime-comparison)。
+待研究:
+- tsup, 專門建立 typescript 開發環境的腳手架
+- 更好的編譯打包方案
+
+尚有其他 ts runtime 可做選擇 [TypeScript runtime comparisons](https://github.com/privatenumber/ts-runtime-comparison)。
+
+## Todo List
+
+- [ ] vite-plugin-node build & serve frontend
+- [ ] 處理 node-ts-template
+- [ ] 整理 gads 專案
+- [ ] 改用 pnpm monorepo 機制
+
+## vite-node vs vite-plugin-node
+
+`vite-node` 是純 runtime 可單獨執行 script, 而 `vite-plugin-node` 會搭配 vite 作為一個 node server。
+
+相關討論:
+- https://github.com/axe-me/vite-plugin-node/issues/94
+- [How to Choose the Right Plugin for a Vite and Express/Node Project?](https://stackoverflow.com/questions/77124072/how-to-choose-the-right-plugin-for-a-vite-and-express-node-project)
+- [Developing and Building Node.js Applications with Vite](https://dev.to/rxliuli/developing-and-building-nodejs-applications-with-vite-311n)
+  - 同名的其他 `vite-plugin-node`, 這篇文章提及 `tsup`
 
 ## Config
 

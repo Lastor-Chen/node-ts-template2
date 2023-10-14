@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express()
 
 app.get('/', (req, res) => {
-  res.send('Hello Express + TS + ts-node')
+  res.send('Hello Express + TS + vite-node')
 })
 
 app.listen(3000, () => {
