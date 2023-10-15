@@ -63,3 +63,43 @@ node16 開始有比較好的 esm & cjs 兼容模式設定 `nodenext`，能以 pa
 <!-- NG, browser cannot read ts file -->
 <script src="./main.ts">
 ```
+
+## Path Alias
+
+使用 vite + vite-plugin-node 方案的話, 可直接使用 vite 的 path alias。<br/>
+
+js 環境可在 `package.json` 設定 path alias。(不能使用 `@` 開頭)
+
+```json
+{
+  "imports": {
+    "#lib/*": "./lib/*",
+    "#*": "./*"
+  }
+}
+```
+
+ts 環境下比較麻煩, 要區分 build 前後運行不同資料夾, 得使用實驗性功能 `--conditions`。<br/>
+參考, [The Native Way To Configure Path Aliases in Frontend Projects](https://betterprogramming.pub/the-native-way-to-configure-path-aliases-in-frontend-projects-5db70f19a6e0)
+
+```json
+{
+  "imports": {
+    "#*": {
+      "production": "./dist/*",
+      "default": "./src/*" // 要放下面
+    }
+  }
+}
+```
+
+設定 `imports` 條件後, 運行時加上參數。
+
+```shell
+$ node --conditions=production dist/app.js
+or
+$ node -C production dist/app.js
+```
+
+也可以考慮使用套件 `tsconfig-paths`。<br/>
+參考, [How to configure and resolve path alias with a Typescript Project](https://plusreturn.com/blog/how-to-configure-and-resolve-path-alias-with-a-typescript-project/)

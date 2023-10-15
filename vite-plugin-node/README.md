@@ -30,6 +30,36 @@ See [Transpile Only](https://vitejs.dev/guide/features.html#transpile-only)<br/>
 }
 ```
 
+## Path Alias
+
+如果遇到 `__dirname` 在 esm 不可用的情況...
+
+```js
+// vite.config.ts
+import path from 'node:path'
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.join(__dirname, './src'), // esm 可能會報錯
+    },
+  },
+})
+```
+
+可將 vite config 改為 cjs 或是用 esm 的作法替代。
+
+```js
+// vite.config.ts
+import { fileURLToPath, URL } from 'node:url'
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+})
+```
+
 ## Build
 
 `vite-plugin-node` 會設定以 ssr 模式進行 vite build, 因此不需求 `index.html`。<br/>

@@ -9,8 +9,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node dist/app.js",
-    "start:dev": "node -r dotenv/config ./dist/app.js",
+    "start": "node --conditions=production dist/app.js",
     "dev": "nodemon src/app.ts",
     "build": "rimraf ./dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,6 +17,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "imports": {
+    "#*": {
+      "production": "./dist/*",
+      "default": "./src/*"
+    }
+  },
   "dependencies": {
     "express": "^4.18.2"
   },

@@ -1,5 +1,9 @@
 import express from 'express'
 
+// path alias
+import { foo } from '#foo.js'
+console.log('foo', foo)
+
 // load dotenv
 const dotenv = await import('dotenv').catch(() => undefined)
 if (process.env.NODE_ENV !== 'production') {
