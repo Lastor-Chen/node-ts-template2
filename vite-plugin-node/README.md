@@ -29,3 +29,18 @@ See [Transpile Only](https://vitejs.dev/guide/features.html#transpile-only)<br/>
   }
 }
 ```
+
+## Build
+
+`vite-plugin-node` 會設定以 ssr 模式進行 vite build, 因此不需求 `index.html`。<br/>
+預設會 bundle js, 如不想 bundle 需添加 rollup 設定。
+
+```js
+build: {
+  rollupOptions: {
+    output: {
+      preserveModules: true,
+    },
+  },
+}
+```

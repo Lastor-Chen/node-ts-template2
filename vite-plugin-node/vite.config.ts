@@ -8,6 +8,17 @@ if (process.env.NODE_ENV !== 'production') {
 
 export default defineConfig(({ command }) => {
   return {
+    build: {
+      /**
+       * No bundle js on build
+       * @see https://github.com/vitejs/vite/issues/9629
+       */
+      rollupOptions: {
+        output: {
+          preserveModules: true,
+        },
+      },
+    },
     server: {
       port: 3000,
     },

@@ -15,7 +15,7 @@
 
 ## Todo List
 
-- [ ] vite-plugin-node build & serve frontend
+- [ ] vite-plugin-node serve frontend
 - [ ] 處理 node-ts-template
 - [ ] 整理 gads 專案
 - [ ] 改用 pnpm monorepo 機制
