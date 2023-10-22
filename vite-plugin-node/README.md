@@ -74,3 +74,38 @@ build: {
   },
 }
 ```
+
+## Serve Frontend
+
+`vite-plugin-node` 製作目的是 for 純 API Server 使用，不適用於 full stack。<br/>
+但硬要的話，可以透過一些手段實現。
+
+在 vite config 設定 VitePluginNode 的 `adapter`，定義 `/api` 開頭的進 Server，其他則進 vite dev server。<br/>
+[Custom Adapter](https://github.com/axe-me/vite-plugin-node#custom-adapter)。
+
+```ts
+// vite.config.ts
+VitePluginNode({
+  async adapter({ app, req, res, next }) {
+    // express
+    if (req.url?.startsWith('/api')) {
+      const express: Express = app
+      express(req, res)
+    } else {
+      next()
+    }
+
+    // fastify
+    if (req.url?.startsWith('/api/')) {
+      const fastify: FastifyInstance = app
+      await fastify.ready()
+      fastify.routing(req, res)
+    } else {
+      next()
+    }
+  }
+  // ...
+})
+```
+
+只是這做法需要考慮 build 後的 static files 路徑對應問題，會增加架構的複雜度。

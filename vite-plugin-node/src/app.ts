@@ -1,12 +1,22 @@
 import express from 'express'
 import router from '@/routes/index.js'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const app = express()
 
-app.use(router)
-app.get('/', (req, res) => {
-  res.send('Hello Express + TS + vite-plugin-node')
-})
+app.use('/api', router)
+
+// serve frontend
+// if (import.meta.env.PROD) {
+  const dirname = path.dirname(fileURLToPath(import.meta.url))
+  app.use(express.static(path.join(dirname, './client')))
+
+  // For single-page apps:
+  app.get('*', (req, res) => {
+    res.sendFile('/index.html');
+  })
+// }
 
 if (import.meta.env.PROD) {
   app.listen(3000, () => {
